@@ -122,12 +122,14 @@ USE_I18N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "miapp/static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media files (User uploads)
 # https://docs.djangoproject.com/en/4.1/topics/files/
