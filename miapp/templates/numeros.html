@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Números de Rifa{% endblock %}
+{% block content %}
+<div class="text-center mb-4">
+	<h2 class="mb-2">Números de la Rifa</h2>
+	<nav class="premio-nav premio-nav-pequena mb-3">
+		<ul class="nav justify-content-center">
+			<li class="nav-item">
+				<a class="nav-link premio-nav-link" href="{% url 'premios' %}">Premios</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link premio-nav-link" href="{% url 'contacto' %}">Contacto</a>
+			</li>
+		</ul>
+	</nav>
+	<!-- Segunda barra de navegación para hojas -->
+	<nav class="premio-nav mb-4">
+		<ul class="nav justify-content-center">
+			{% if hoja != 1 %}
+			<li class="nav-item"><a class="nav-link premio-nav-link" href="{% url 'numeros' %}">Hoja 1</a></li>
+			{% endif %}
+			{% if hoja != 2 %}
+			<li class="nav-item"><a class="nav-link premio-nav-link" href="{% url 'numeros_hoja2' %}">Hoja 2</a></li>
+			{% endif %}
+			{% if hoja != 3 %}
+			<li class="nav-item"><a class="nav-link premio-nav-link" href="{% url 'numeros_hoja3' %}">Hoja 3</a></li>
+			{% endif %}
+			{% if hoja != 4 %}
+			<li class="nav-item"><a class="nav-link premio-nav-link" href="{% url 'numeros_hoja4' %}">Hoja 4</a></li>
+			{% endif %}
+		</ul>
+	</nav>
+	<p style="color:#555; font-size:1.1em;">Selecciona tu número favorito.<br>
+		<span style="display:inline-flex; align-items:center; font-weight:bold;">
+			<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Disponible" style="width:32px; height:32px; margin-right:6px;">Disponible
+		</span>
+		&nbsp;|&nbsp;
+		<span style="display:inline-flex; align-items:center; font-weight:bold;">
+			<img src="{% static 'img/bloque_ocupado.jpg' %}" alt="No disponible" style="width:32px; height:32px; margin-right:6px;">No disponible
+		</span>
+	</p>
+</div>
+<div class="numeros-grid">
+	{% for numero in numeros %}
+		<div class="numero-bloque-mario">
+			{% if numero.disponible %}
+				<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Bloque Mario" class="bloque-img">
+			{% else %}
+				<img src="{% static 'img/bloque_ocupado.jpg' %}" alt="Bloque Ocupado" class="bloque-img">
+			{% endif %}
+			<span class="numero-en-bloque">{{ numero.valor }}</span>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}

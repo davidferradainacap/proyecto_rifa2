@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Panel Admin Números{% endblock %}
+{% block content %}
+<h2 class="mb-4">Panel Admin: Todas las Hojas</h2>
+{% for hoja in hojas %}
+  <h4 class="mt-4 mb-2">Hoja {{ hoja.hoja }}</h4>
+  <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
+    {% for numero in hoja.numeros %}
+      <a href="{% url 'numero_detalle' numero.pk %}" class="numero-bloque-mario-btn">
+        {% if numero.disponible %}
+          <img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Bloque Mario" class="bloque-img">
+        {% else %}
+          <img src="{% static 'img/bloque_ocupado.jpg' %}" alt="Bloque Ocupado" class="bloque-img">
+        {% endif %}
+        <span class="numero-en-bloque">{{ numero.valor }}</span>
+      </a>
+    {% endfor %}
+  </div>
+{% endfor %}
+{% endblock %}

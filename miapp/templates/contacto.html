@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Contacto - Comprar Número de Rifa{% endblock %}
+{% block content %}
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center min-vh-100 p-3">
+    <div class="w-100" style="max-width: 500px;">
+        <h2 class="mb-4 text-center" style="font-size:2rem;">
+            ¿Quieres comprar un número de rifa?
+        </h2>
+        <p class="mb-4 text-center" style="font-size:1rem;">
+            Haz clic en el botón para contactar al administrador por WhatsApp.
+        </p>
+        <a href="https://wa.me/+56942263513?text=Hola%2C%20quiero%20comprar%20un%20n%C3%BAmero%20de%20rifa" target="_blank" class="btn btn-success btn-lg w-100" style="font-size:1.1rem; padding: 0.75rem 0;">
+            Contactar por WhatsApp
+        </a>
+    </div>
+    <style>
+    @media (max-width: 576px) {
+        h2 { font-size: 1.2rem !important; }
+        p { font-size: 0.95rem !important; }
+        .btn-lg { font-size: 0.98rem !important; padding: 0.6rem 0 !important; }
+    }
+    </style>
+</div>
+{% endblock %}
