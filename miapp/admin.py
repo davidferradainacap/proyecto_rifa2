@@ -3,7 +3,8 @@ from .models import Premio, Numero
 
 @admin.register(Premio)
 class PremioAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'descripcion')
+    list_display = ('nombre', 'categoria', 'descripcion')
+    list_filter = ('categoria',)
     search_fields = ('nombre',)
 
 @admin.register(Numero)

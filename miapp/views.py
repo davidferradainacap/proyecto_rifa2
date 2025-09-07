@@ -52,7 +52,17 @@ def admin_numeros(request):
     return render(request, "admin_numeros.html", {"numeros": nums})
 
 def premios(request):
-    premios_qs = Premio.objects.all()
+    # Ordenar por categoría usando anotación para asegurar el orden en la base de datos
+    from django.db.models import Case, When, IntegerField
+    premios_qs = Premio.objects.annotate(
+        categoria_orden=Case(
+            When(categoria='1er', then=0),
+            When(categoria='2do', then=1),
+            When(categoria='3er', then=2),
+            default=99,
+            output_field=IntegerField(),
+        )
+    ).order_by('categoria_orden')
     return render(request, "premios.html", {"premios": premios_qs})
 
 def numero_detalle(request, pk):

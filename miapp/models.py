@@ -3,13 +3,21 @@ import json
 
 # Create your models here.
 
+
+
 class Premio(models.Model):
+    CATEGORIA_CHOICES = [
+        ('1er', '1er Lugar'),
+        ('2do', '2do Lugar'),
+        ('3er', '3er Lugar'),
+    ]
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
+    descripcion = models.TextField(blank=True, null=True)
     imagen = models.ImageField(upload_to='premios/', blank=True, null=True)
+    categoria = models.CharField(max_length=3, choices=CATEGORIA_CHOICES, default='1er')
 
     def __str__(self):
-        return self.nombre
+        return f"{self.get_categoria_display()} - {self.nombre}"
 
 
 
