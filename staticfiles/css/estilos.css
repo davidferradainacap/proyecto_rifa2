@@ -1,3 +1,290 @@
+/* --- NAVBAR MARIO KART BUTTONS --- */
+.nav-mario-btn {
+    font-family: 'Press Start 2P', cursive, Arial, sans-serif;
+    font-size: 1.05em;
+    color: #fff !important;
+    background: linear-gradient(90deg, #ffb300 60%, #ffe082 100%);
+    border: 2px solid #ff9800;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px #ffe082, 0 1.5px 0 #b35a00;
+    padding: 0.7em 1.2em;
+    margin: 0.2em 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: transform 0.12s, box-shadow 0.12s, background 0.18s;
+    position: relative;
+    z-index: 1;
+}
+.nav-mario-btn .nav-icon {
+    font-size: 1.2em;
+    filter: drop-shadow(0 1px 0 #fffbe7);
+}
+.nav-mario-btn:hover, .nav-mario-btn:focus {
+    background: linear-gradient(90deg, #ffe082 60%, #ffb300 100%);
+    color: #b35a00 !important;
+    transform: scale(1.08) rotate(-2deg);
+    box-shadow: 0 4px 24px #ffecb3, 0 2px 0 #b35a00;
+    text-shadow: 0 1px 0 #fffbe7;
+}
+@media (max-width: 991px) {
+    .navbar-nav {
+        gap: 0.5em !important;
+    }
+    .nav-mario-btn {
+        font-size: 0.95em;
+        padding: 0.6em 0.7em;
+        border-radius: 12px;
+    }
+}
+@media (max-width: 600px) {
+    .nav-mario-btn {
+        font-size: 0.85em;
+        padding: 0.5em 0.5em;
+        border-radius: 10px;
+    }
+}
+/* Hoja nav admin - resalta la hoja activa */
+.hoja-nav-admin {
+    font-family: 'Press Start 2P', cursive, Arial, sans-serif;
+    font-size: 1em;
+    color: #fff;
+    background: linear-gradient(90deg, #ffb300 60%, #ffd700 100%);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #ffecb3, 0 0 0 2px #fff8, 0 0 8px 2px #ffb30055;
+    border: 2.5px solid #ffb300;
+    font-weight: bold;
+    padding: 0.5em 1.2em;
+    margin: 0 0.2em;
+    transition: background 0.2s, color 0.2s;
+    text-shadow: 1px 1px 0 #fffbe7, 0 0 2px #ffb300;
+}
+.premio-badge-1er {
+    font-size: 0.68em !important;
+    padding: 0.03em 0.13em 0.03em 0.11em;
+    border-radius: 0.32em;
+    border-width: 1px;
+}
+.premio-badge-1er {
+    font-size: 0.85em !important;
+    padding: 0.05em 0.22em 0.05em 0.18em;
+    border-radius: 0.5em;
+    border-width: 1.5px;
+}
+.premios-grid-container {
+    margin-top: 2.5rem;
+}
+.premios-grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 6rem auto 2.5rem auto;
+    padding: 0.5em 0.5em 1.5em 0.5em;
+    box-sizing: border-box;
+    gap: 2.5rem;
+}
+.premio-card-grid {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+@media (max-width: 600px) {
+    .premios-grid-container {
+        max-width: 98vw;
+        margin-top: 2.2rem;
+        gap: 1.2rem;
+        padding: 0.2em 0.1em 1em 0.1em;
+    }
+}
+.premio-card-grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+.premio-card-principal {
+    width: 100%;
+    min-width: 0;
+    max-width: 420px;
+}
+@media (max-width: 600px) {
+    .premios-grid-container {
+        grid-template-columns: 1fr;
+        gap: 1.2rem 0.5rem;
+        padding: 0.2em 0.1em 1em 0.1em;
+    }
+}
+.premio-badge-1er, .premio-badge-1er *, .premio-badge-2do, .premio-badge-2do *, .premio-badge-3er, .premio-badge-3er * {
+    color: #111 !important;
+    -webkit-text-fill-color: #111 !important;
+    text-shadow: none !important;
+}
+.premio-badge-1er, .premio-badge-2do, .premio-badge-3er {
+    display: flex;
+    align-items: center;
+    gap: 0.18em;
+    font-family: 'Press Start 2P', cursive, Arial, sans-serif;
+    font-size: 0.98em !important;
+    padding: 0.08em 0.38em 0.08em 0.32em;
+    border-radius: 0.7em;
+    border-width: 2px;
+    border-style: solid;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    outline: 1.5px solid #fff;
+    outline-offset: 1px;
+    color: #111 !important;
+    text-shadow: none !important;
+    background: linear-gradient(135deg, #fffbe7 0%, #ffe082 40%, #ffd700 80%, #fffbe7 100%);
+    box-shadow: 0 1px 8px 0 #ffecb3, 0 0 0 2px #ffffffcc, 0 0 8px 2px #ffb30055;
+}
+.premio-badge-1er {
+    border-color: #ffb300;
+    background: linear-gradient(135deg, 
+    #fffbe7 0%, #ffe082 40%, #ffd700 80%, #fffbe7 100%) !important;
+}
+.premio-badge-2do {
+    border-color: #bfa900;
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 40%, #bdbdbd 80%, #f8f8f8 100%) !important;
+}
+.premio-badge-3er {
+    border-color: #b87333;
+    background: linear-gradient(135deg, #fffbe7 0%, #e0a97a 40%, #b87333 80%, #fffbe7 100%) !important;
+}
+@keyframes kart-shine {
+    0% { box-shadow: 0 0 24px #fff176, 0 0 32px #ffb30099; }
+    50% { box-shadow: 0 0 48px #fffbe7, 0 0 64px #ffb300cc; }
+    100% { box-shadow: 0 0 24px #fff176, 0 0 32px #ffb30099; }
+}
+.premio-icon {
+    font-size: 1.3em;
+    vertical-align: middle;
+    display: inline-block;
+    filter: drop-shadow(0 0 4px #fff176);
+}
+.premio-lugar-text {
+    margin-left: 0.3em;
+    display: inline-block;
+    vertical-align: middle;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.premio-badge-1er, .premio-badge-2do, .premio-badge-3er {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+.premio-icon {
+    font-size: 1.2em;
+    vertical-align: middle;
+    display: inline-block;
+}
+.premio-lugar-text {
+    margin-left: 0.2em;
+    display: inline-block;
+    vertical-align: middle;
+}
+.premio-badge-1er, .premio-badge-2do, .premio-badge-3er {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+.premio-lugar-text {
+    margin-left: 0.2em;
+    display: inline-block;
+    vertical-align: middle;
+}
+.premio-lugar-text {
+    font-size: 1.1em;
+    font-family: 'Press Start 2P', cursive, Arial, sans-serif;
+    margin: 0.3em 0 0.2em 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+}
+.premio-text-1er, .premio-text-2do, .premio-text-3er {
+    font-weight: bold;
+}
+.premio-icon {
+    font-size: 1.2em;
+    margin-right: 0.1em;
+    vertical-align: middle;
+    display: inline-block;
+}
+.premio-lugar-text {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.1em;
+}
+.premios-podio-abajo {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2.5em;
+}
+.premio-podio-col {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+@media (max-width: 900px) {
+    .premios-podio-abajo {
+        gap: 1em;
+    }
+}
+@media (max-width: 600px) {
+    .premios-podio-abajo {
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    .premio-podio-col {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+.premio-card-2do, .premio-card-3er {
+    max-width: 320px !important;
+    min-width: 220px !important;
+    width: 90% !important;
+    transform: scale(0.88);
+    z-index: 1;
+}
+.premio-card-2do .premio-img, .premio-card-3er .premio-img {
+    height: 220px !important;
+}
+@media (max-width: 600px) {
+    .premio-card-2do, .premio-card-3er {
+        max-width: 98vw !important;
+        min-width: unset !important;
+        width: 98vw !important;
+        transform: scale(0.98);
+    }
+    .premio-card-2do .premio-img, .premio-card-3er .premio-img {
+        height: 120px !important;
+    }
+}
+.container-podio {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 2em auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container-podio .row {
+    width: 100%;
+}
+.premio-card-2do, .premio-card-3er {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 @media (max-width: 576px) {
     .premio-nav {
@@ -265,6 +552,25 @@
     font-family: 'Press Start 2P', cursive;
     letter-spacing: 1px;
     border: 3px solid #fff176;
+    transition: font-size 0.2s, background 0.2s;
+}
+.premio-badge-1er {
+    font-size: 1.7em !important;
+    background: linear-gradient(90deg, #ff5252 60%, #ffb300 100%) !important;
+    color: #fff !important;
+    border: 4px solid #fff176 !important;
+    box-shadow: 0 0 16px #ffb30099;
+    text-shadow: 2px 2px 0 #b35a00, 0 0 8px #fff176;
+}
+.premio-card-title-1er {
+    font-size: 2em !important;
+    color: #e53935 !important;
+    text-shadow: 2px 2px 0 #fff176, 2px 2px 0 #b35a00;
+}
+.premio-card-1er {
+    border-width: 7px;
+    box-shadow: 0 0 32px #ffb30099, 0 8px 32px #0002;
+    z-index: 2;
 }
 .premio-img {
     margin-top: 2.5em;
@@ -315,7 +621,8 @@ body {
     font-family: 'Press Start 2P', cursive, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(180deg, #5c94fc 0%, #b6eaff 100%);
+    background: url("../img/fondo_celeste.jpg") no-repeat center center fixed;
+    background-size: cover;
     min-height: 100vh;
 }
 
