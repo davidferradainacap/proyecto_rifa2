@@ -1,3 +1,5 @@
+# Permitir formularios grandes en admin-numeros
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 5000
 """
 Django settings for rifaed project.
 
