@@ -9,8 +9,8 @@ class PremioAdmin(admin.ModelAdmin):
 
 @admin.register(Numero)
 class NumeroAdmin(admin.ModelAdmin):
-    list_display = ('valor', 'hoja', 'disponible', 'nombre_completo', 'telefono', 'gmail')
-    list_editable = ('disponible', 'nombre_completo', 'telefono', 'gmail')
+    list_display = ('valor', 'hoja', 'disponible', 'asistencia', 'nombre_completo', 'telefono', 'gmail')
+    list_editable = ('disponible', 'asistencia', 'nombre_completo', 'telefono', 'gmail')
     search_fields = ('valor', 'nombre_completo', 'telefono', 'gmail')
-    list_filter = ('hoja', 'disponible')
+    list_filter = ('hoja', 'disponible', 'asistencia')
     ordering = ('valor',)

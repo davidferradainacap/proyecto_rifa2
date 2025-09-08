@@ -3,9 +3,9 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Numero, Premio, Publicidad
+from django.db.models import Q
 from .forms import PremioForm, PublicidadForm
 from django.views.decorators.http import require_POST
-
 # --- BORRAR PREMIOS SECUNDARIOS ---
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -112,17 +112,22 @@ def contacto(request):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def panel_admin_numeros(request):
+    from django.contrib import messages
     if request.method == 'POST':
-        # Procesar todos los números de la hoja
-        ids = [k.split('_')[1] for k in request.POST.keys() if k.startswith('numero_id_')]
+        # Procesar todos los números de la hoja, solo IDs numéricos
+        ids = [k.split('_')[2] for k in request.POST.keys() if k.startswith('numero_id_') and k.split('_')[2].isdigit()]
         for numero_id in ids:
-            numero = get_object_or_404(Numero, id=numero_id)
-            numero.gmail = request.POST.get(f'gmail_{numero_id}', '')
-            numero.nombre_completo = request.POST.get(f'nombre_completo_{numero_id}', '')
-            numero.telefono = request.POST.get(f'telefono_{numero_id}', '')
+            try:
+                numero = Numero.objects.get(id=numero_id)
+            except Numero.DoesNotExist:
+                continue
+            numero.gmail = request.POST.get(f'gmail_{numero_id}', '').strip()
+            numero.nombre_completo = request.POST.get(f'nombre_completo_{numero_id}', '').strip()
+            numero.telefono = request.POST.get(f'telefono_{numero_id}', '').strip()
             numero.disponible = f'disponible_{numero_id}' in request.POST
             numero.asistencia = f'asistencia_{numero_id}' in request.POST
             numero.save()
+        messages.success(request, '¡Datos guardados correctamente!')
         return redirect('admin_numeros')
     hojas = []
     for h in range(1, 5):
@@ -137,7 +142,6 @@ from .models import Numero, Premio, EstadoRuleta
 import random
 
 DURACION_RULETA = 10.0  # segundos
-
 def home(request):
     return render(request, "home.html")
 

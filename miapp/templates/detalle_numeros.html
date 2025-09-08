@@ -25,13 +25,18 @@
 </div>
 <div class="numeros-grid">
 	{% for numero in numeros %}
-		<a href="{% url 'numero_detalle' numero.pk %}" class="numero-bloque-mario" style="text-decoration:none;">
+		<a href="{% url 'numero_detalle' numero.pk %}" class="numero-bloque-mario" style="text-decoration:none; position:relative;">
 			{% if numero.disponible %}
 				<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Bloque Mario" class="bloque-img">
 			{% else %}
 				<img src="{% static 'img/bloque_ocupado.jpg' %}" alt="Bloque Ocupado" class="bloque-img">
 			{% endif %}
 			<span class="numero-en-bloque">{{ numero.valor }}</span>
+			<!-- Descripción de disponibilidad y asistencia -->
+			<div style="position:absolute; left:0; right:0; bottom:-55px; background:rgba(255,255,255,0.95); font-size:0.95em; border-radius:8px; padding:4px 2px; box-shadow:0 2px 6px #0002;">
+				<strong>Disponible:</strong> {% if numero.disponible %}Sí{% else %}No{% endif %}<br>
+				<strong>Asistencia:</strong> {% if numero.asistencia %}Sí{% else %}No{% endif %}
+			</div>
 		</a>
 	{% endfor %}
 </div>

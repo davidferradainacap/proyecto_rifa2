@@ -43,7 +43,9 @@ class Numero(models.Model):
         unique_together = ('valor', 'hoja')
 
     def __str__(self):
-        return str(self.valor)
+        disp = 'Sí' if self.disponible else 'No'
+        asis = 'Sí' if self.asistencia else 'No'
+        return f"{self.valor} | Disponible: {disp} | Asistencia: {asis}"
 
 class EstadoRuleta(models.Model):
     en_progreso = models.BooleanField(default=False)
