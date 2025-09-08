@@ -123,8 +123,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "miapp/static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+<<<<<<< HEAD
+=======
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+>>>>>>> b15445d848f7325f671d59eb1608baa8342da5a5
 # Media files (User uploads)
 # https://docs.djangoproject.com/en/4.1/topics/files/
 
