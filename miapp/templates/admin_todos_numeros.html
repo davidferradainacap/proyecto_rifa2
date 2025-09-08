@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Todos los Números (Admin){% endblock %}
+{% block content %}
+<div class="text-center mb-4">
+	<h2 class="mb-2 animate__animated animate__fadeIn">Todos los Números (Vista Admin)</h2>
+	<p style="color:#555; font-size:1.1em;">Visualiza la información de todos los números.<br>
+		<span style="display:inline-flex; align-items:center; font-weight:bold;">
+			<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Disponible" style="width:32px; height:32px; margin-right:6px;">Disponible
+		</span>
+		&nbsp;|&nbsp;
+		<span style="display:inline-flex; align-items:center; font-weight:bold;">
+			<img src="{% static 'img/bloque_ocupado.jpg' %}" alt="No disponible" style="width:32px; height:32px; margin-right:6px;">No disponible
+		</span>
+	</p>
+</div>
+<div class="numeros-grid">
+	{% for numero in numeros %}
+		<div class="numero-bloque-mario" style="position:relative;">
+			{% if numero.disponible %}
+				<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Bloque Mario" class="bloque-img">
+			{% else %}
+				<img src="{% static 'img/bloque_ocupado.jpg' %}" alt="Bloque Ocupado" class="bloque-img">
+			{% endif %}
+			<span class="numero-en-bloque">{{ numero.valor }}</span>
+			<div style="position:absolute; left:0; right:0; bottom:-70px; background:rgba(255,255,255,0.95); font-size:0.95em; border-radius:8px; padding:4px 2px; box-shadow:0 2px 6px #0002;">
+				<strong>Gmail:</strong> {{ numero.gmail|default:'-' }}<br>
+				<strong>Nombre:</strong> {{ numero.nombre_completo|default:'-' }}<br>
+				<strong>Tel:</strong> {{ numero.telefono|default:'-' }}<br>
+				<strong>Hoja:</strong> {{ numero.hoja }}
+			</div>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}

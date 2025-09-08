@@ -3,24 +3,34 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView, LoginView
+
 from . import views
 
 
 
 urlpatterns = [
+    path('gestor-publicidad/', views.gestor_publicidad, name='gestor_publicidad'),
+    path('gestor-publicidad/borrar/<int:pk>/', views.borrar_publicidad, name='borrar_publicidad'),
+    path('gestor-premios/editar/<int:pk>/', views.editar_premio, name='editar_premio'),
+    path('gestor-premios/borrar/<int:pk>/', views.borrar_premio, name='borrar_premio'),
+    path('gestor-premios/borrar-secundarios/', views.borrar_premios_secundarios, name='borrar_premios_secundarios'),
+    path('gestor-premios/', views.gestor_premios, name='gestor_premios'),
     path('', views.home, name='home'),
     path('numeros/', views.numeros, name='numeros'), # Hoja 1
     path('numeros/hoja2/', views.numeros_hoja2, name='numeros_hoja2'),
     path('numeros/hoja3/', views.numeros_hoja3, name='numeros_hoja3'),
     path('numeros/hoja4/', views.numeros_hoja4, name='numeros_hoja4'),
     path('admin-numeros/', views.panel_admin_numeros, name='admin_numeros'),
+    path('admin-todos-numeros/', views.admin_todos_numeros, name='admin_todos_numeros'),
     path('premios/', views.premios, name='premios'),
+    path('premios/borrar-todos/', views.borrar_todos_premios, name='borrar_todos_premios'),
     path('numero/<int:pk>/', views.numero_detalle, name='numero_detalle'),
     path('iniciar-ruleta/', views.iniciar_ruleta, name='iniciar_ruleta'),
     path('estado-ruleta/', views.estado_ruleta, name='estado_ruleta'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
     path('contacto/', views.contacto, name='contacto'),
+    path('detalle-admin/', views.detalle_numeros_admin, name='detalle_numeros_admin'),
 ]
 
 if settings.DEBUG:

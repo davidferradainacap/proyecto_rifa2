@@ -1,13 +1,129 @@
-# Vista para la página de contacto
-from django.shortcuts import render
 
+# --- IMPORTS ---
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Numero, Premio, Publicidad
+from .forms import PremioForm, PublicidadForm
+from django.views.decorators.http import require_POST
+
+# --- BORRAR PREMIOS SECUNDARIOS ---
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+@require_POST
+def borrar_premios_secundarios(request):
+    Premio.objects.filter(categoria='sec').delete()
+    return redirect('gestor_premios')
+
+# --- BORRAR TODOS LOS PREMIOS ---
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+@require_POST
+def borrar_todos_premios(request):
+    Premio.objects.all().delete()
+    return redirect('premios')
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def gestor_publicidad(request):
+    publicidades = Publicidad.objects.order_by('-creado')
+    if request.method == 'POST':
+        form = PublicidadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('gestor_publicidad')
+    else:
+        form = PublicidadForm()
+    return render(request, 'gestor_publicidad.html', {'publicidades': publicidades, 'form': form})
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+@require_POST
+def borrar_publicidad(request, pk):
+    publicidad = get_object_or_404(Publicidad, pk=pk)
+    publicidad.delete()
+    return redirect('gestor_publicidad')
+
+# --- GESTOR DE PREMIOS ---
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def gestor_premios(request):
+    # Agrupar premios por categoría y ordenar por nombre
+    categorias = [
+        ('1er', '1er Lugar'),
+        ('2do', '2do Lugar'),
+        ('3er', '3er Lugar'),
+        ('sec', 'Secundario'),
+    ]
+    premios_por_categoria = []
+    for cat_key, cat_label in categorias:
+        premios_cat = Premio.objects.filter(categoria=cat_key).order_by('nombre')
+        premios_por_categoria.append((cat_label, premios_cat))
+    if request.method == 'POST':
+        form = PremioForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('gestor_premios')
+    else:
+        form = PremioForm()
+    return render(request, 'gestor_premios.html', {'premios_por_categoria': premios_por_categoria, 'form': form})
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def editar_premio(request, pk):
+    premio = Premio.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = PremioForm(request.POST, request.FILES, instance=premio)
+        if form.is_valid():
+            form.save()
+            return redirect('gestor_premios')
+    else:
+        form = PremioForm(instance=premio)
+    return render(request, 'gestor_premios.html', {'premios': Premio.objects.all(), 'form': form, 'editar': True, 'premio_editar': premio})
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def borrar_premio(request, pk):
+    premio = Premio.objects.get(pk=pk)
+    if request.method == 'POST':
+        premio.delete()
+        return redirect('gestor_premios')
+
+# Vista para mostrar todos los números por hoja solo para admin
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def detalle_numeros_admin(request):
+    hoja = int(request.GET.get('hoja', 1))
+    hojas = [1, 2, 3, 4]
+    numeros = Numero.objects.filter(hoja=hoja).order_by('valor')
+    return render(request, "detalle_numeros_admin.html", {"numeros": numeros, "hoja": hoja, "hojas": hojas})
+
+# Vista para que el admin vea todos los números con información
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def admin_todos_numeros(request):
+    numeros = Numero.objects.all().order_by('hoja', 'valor')
+    return render(request, "admin_todos_numeros.html", {"numeros": numeros})
+
+# Vista para la página de contacto
 def contacto(request):
     return render(request, 'contacto.html')
-from django.contrib.auth.decorators import login_required, user_passes_test
+
 # Vista para el panel de admin con todos los números por hoja
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def panel_admin_numeros(request):
+    if request.method == 'POST':
+        # Procesar todos los números de la hoja
+        ids = [k.split('_')[1] for k in request.POST.keys() if k.startswith('numero_id_')]
+        for numero_id in ids:
+            numero = get_object_or_404(Numero, id=numero_id)
+            numero.gmail = request.POST.get(f'gmail_{numero_id}', '')
+            numero.nombre_completo = request.POST.get(f'nombre_completo_{numero_id}', '')
+            numero.telefono = request.POST.get(f'telefono_{numero_id}', '')
+            numero.disponible = f'disponible_{numero_id}' in request.POST
+            numero.asistencia = f'asistencia_{numero_id}' in request.POST
+            numero.save()
+        return redirect('admin_numeros')
     hojas = []
     for h in range(1, 5):
         nums = Numero.objects.filter(hoja=h).order_by('valor')
@@ -23,8 +139,7 @@ import random
 DURACION_RULETA = 10.0  # segundos
 
 def home(request):
-    premios_qs = Premio.objects.all()
-    return render(request, "premios.html", {"premios": premios_qs})
+    return render(request, "home.html")
 
 
 # Hoja 1: Números hoja=1
@@ -52,18 +167,14 @@ def admin_numeros(request):
     return render(request, "admin_numeros.html", {"numeros": nums})
 
 def premios(request):
-    # Ordenar por categoría usando anotación para asegurar el orden en la base de datos
-    from django.db.models import Case, When, IntegerField
-    premios_qs = Premio.objects.annotate(
-        categoria_orden=Case(
-            When(categoria='1er', then=0),
-            When(categoria='2do', then=1),
-            When(categoria='3er', then=2),
-            default=99,
-            output_field=IntegerField(),
-        )
-    ).order_by('categoria_orden')
-    return render(request, "premios.html", {"premios": premios_qs})
+    premios_qs = Premio.objects.exclude(categoria='sec')
+    premios_secundarios = Premio.objects.filter(categoria='sec')
+    publicidades = Publicidad.objects.order_by('-creado')
+    return render(request, "premios.html", {
+        "premios": premios_qs,
+        "publicidades": publicidades,
+        "premios_secundarios": premios_secundarios
+    })
 
 def numero_detalle(request, pk):
     numero = get_object_or_404(Numero, pk=pk)

@@ -1,8 +1,16 @@
+
 from django.db import models
 import json
 
-# Create your models here.
+class Publicidad(models.Model):
+    imagen = models.ImageField(upload_to='publicidad/')
+    descripcion = models.CharField(max_length=255, blank=True, null=True)
+    creado = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Publicidad {self.id}"
+
+# Create your models here.
 
 
 class Premio(models.Model):
@@ -10,8 +18,9 @@ class Premio(models.Model):
         ('1er', '1er Lugar'),
         ('2do', '2do Lugar'),
         ('3er', '3er Lugar'),
+        ('sec', 'Secundario'),
     ]
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100, blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True)
     imagen = models.ImageField(upload_to='premios/', blank=True, null=True)
     categoria = models.CharField(max_length=3, choices=CATEGORIA_CHOICES, default='1er')
@@ -24,6 +33,7 @@ class Premio(models.Model):
 class Numero(models.Model):
     valor = models.IntegerField()
     disponible = models.BooleanField(default=True)
+    asistencia = models.BooleanField(default=False)
     nombre_completo = models.CharField(max_length=100, blank=True, null=True)
     telefono = models.CharField(max_length=20, blank=True, null=True)
     gmail = models.EmailField(blank=True, null=True)

@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}Premios{% endblock %}
 {% block content %}
-<div class="premio-main-container">
-	<h2 class="premio-title text-center mb-3">🎁 Premios de la Rifa Mario 🎁</h2>
+<div class="premio-main-container" data-aos="fade-up" data-aos-duration="900">
+	<h2 class="premio-title text-center mb-3">🎁 LOS MEJORES PREMIOS 🎁</h2>
 	<nav class="premio-nav mb-4">
 		<ul class="nav justify-content-center">
 			<li class="nav-item">
@@ -16,8 +17,8 @@
 	</nav>
 	<div class="premios-grid-container">
 		{% for premio in premios %}
-		<div class="premio-card-grid">
-			<div class="card card-mario shadow-lg animate__animated animate__fadeInUp position-relative premio-card-principal {% if premio.categoria == '1er' %}premio-card-1er{% elif premio.categoria == '2do' %}premio-card-2do{% elif premio.categoria == '3er' %}premio-card-3er{% endif %}">
+		<div class="premio-card-grid" data-aos="zoom-in-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+			<div class="card card-mario shadow-lg position-relative premio-card-principal {% if premio.categoria == '1er' %}premio-card-1er{% elif premio.categoria == '2do' %}premio-card-2do{% elif premio.categoria == '3er' %}premio-card-3er{% endif %}">
 				<div class="premio-badge-container">
 					{% if premio.categoria == '1er' %}
 						<span class="premio-badge premio-badge-1er">
@@ -47,7 +48,9 @@
 					{% endif %}
 				{% endif %}
 				<div class="card-body d-flex flex-column justify-content-between align-items-center">
-					<h5 class="card-title premio-card-title {% if premio.categoria == '1er' %}premio-card-title-1er{% endif %}">{{ premio.nombre }}</h5>
+									{% if premio.nombre %}
+									<h5 class="card-title premio-card-title {% if premio.categoria == '1er' %}premio-card-title-1er{% endif %}">{{ premio.nombre }}</h5>
+									{% endif %}
 					{% if premio.descripcion %}
 					<p class="card-text premio-card-text">{{ premio.descripcion }}</p>
 					{% endif %}
@@ -60,7 +63,76 @@
 		</div>
 		{% endfor %}
 	</div>
+
 </div>
-<!-- Animaciones de Animate.css -->
+
+<div class="container mt-5" data-aos="fade-up" data-aos-duration="900">
+	<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+		<div class="col-12">
+			<div class="card shadow-lg p-4" style="background:rgba(255,255,255,0.95); border-radius: 25px;">
+				<h3 class="text-center mb-4" style="font-family: 'Luckiest Guy', cursive; color: #007bff;">Promociones del evento</h3>
+				<div class="row justify-content-center">
+					{% for pub in publicidades %}
+					<div class="col-md-4 mb-4">
+						<div class="card h-100 border-0">
+							<img src="{{ pub.imagen.url }}" class="card-img-top" style="object-fit:cover; height:200px; border-radius: 15px;">
+							{% if pub.descripcion %}
+							<div class="card-body text-center">
+								<p class="card-text text-muted">{{ pub.descripcion }}</p>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+					{% empty %}
+					<div class="col-12 text-center text-muted">No hay publicidad disponible.</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div class="container mt-5" data-aos="fade-up" data-aos-duration="900">
+	<div class="row justify-content-center">
+		<div class="col-12">
+			<div class="card shadow-lg p-4" style="background:rgba(255,255,255,0.95); border-radius: 25px;">
+				<div class="d-flex justify-content-between align-items-center mb-4">
+					<h3 class="text-center flex-grow-1 mb-0" style="font-family: 'Luckiest Guy', cursive; color: #ff8800; font-size: 2.5rem;">Más Premios</h3>
+				</div>
+				<div class="row gx-1 gy-2 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+					{% for premio in premios_secundarios %}
+					<div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center align-items-center mb-2" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+						{% if premio.imagen %}
+							<img src="{{ premio.imagen.url }}" class="premio-img-secundario" alt="{{ premio.nombre }}" loading="lazy">
+						{% else %}
+							<img src="{% static 'img/premio_1ro.jpg' %}" class="premio-img-secundario" alt="Premio secundario" loading="lazy">
+						{% endif %}
+					</div>
+					{% empty %}
+					<div class="col-12 text-center text-muted">No hay premios secundarios registrados.</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Animaciones de Animate.css y AOS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({ once: true });</script>
+<style>
+.premio-img-secundario {
+	object-fit: contain;
+	height: 420px;
+	max-height: 420px;
+	width: 100%;
+	max-width: 99%;
+	background: transparent;
+	border-radius: 24px;
+	box-shadow: none;
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+</style>
 {% endblock %}

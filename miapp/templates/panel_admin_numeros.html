@@ -1,21 +1,52 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block title %}Panel Admin Números{% endblock %}
 {% block content %}
-<h2 class="mb-4">Panel Admin: Todas las Hojas</h2>
-{% for hoja in hojas %}
-  <h4 class="mt-4 mb-2">Hoja {{ hoja.hoja }}</h4>
-  <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
-    {% for numero in hoja.numeros %}
-      <a href="{% url 'numero_detalle' numero.pk %}" class="numero-bloque-mario-btn">
-        {% if numero.disponible %}
-          <img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Bloque Mario" class="bloque-img">
-        {% else %}
-          <img src="{% static 'img/bloque_ocupado.jpg' %}" alt="Bloque Ocupado" class="bloque-img">
-        {% endif %}
-        <span class="numero-en-bloque">{{ numero.valor }}</span>
-      </a>
-    {% endfor %}
+<div class="container" style="max-width:1600px;">
+  <h2 class="mb-4 text-center" style="font-family: 'Press Start 2P', cursive, Arial, sans-serif; color: #ffb300; text-shadow: 2px 2px 0 #fffbe7, 0 0 8px #ffb300; letter-spacing:1px; font-size:1.5rem;">Panel de Administración de Números</h2>
+  {% for hoja in hojas %}
+  <div class="card shadow-lg mb-5" style="border: 3px solid #ffb300; border-radius: 22px; background: #fffbe7;">
+  <div class="card-header bg-warning text-dark text-center" style="font-family: 'Press Start 2P', cursive; font-size:1.05em; border-radius: 18px 18px 0 0;">Hoja {{ hoja.hoja }}</div>
+    <div class="card-body p-0">
+      <div class="table-responsive" style="max-width:1550px; margin:0 auto;">
+        <form method="post" class="m-0">
+          {% csrf_token %}
+          <table class="table table-bordered table-sm align-middle text-center mb-0" style="background: #fff; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.13); overflow: hidden; font-size:0.97em;">
+            <thead style="background: #ffe082;">
+              <tr style="font-family: 'Press Start 2P', cursive; color: #b35a00; font-size:0.98em;">
+                <th style="min-width:70px;">Número</th>
+                <th style="min-width:140px;">Gmail</th>
+                <th style="min-width:140px;">Nombre Completo</th>
+                <th style="min-width:110px;">Teléfono</th>
+                <th style="min-width:90px;">Disponible</th>
+                <th style="min-width:90px;">Asistencia</th>
+              </tr>
+            </thead>
+            <tbody>
+    <form method="post">
+      {% csrf_token %}
+      <tbody>
+            {% for numero in hoja.numeros %}
+              <tr style="background: #fff;">
+                <td style="font-family: 'Press Start 2P', cursive; color: #007bff; font-size:1em;">{{ numero.valor }}</td>
+                <td><input type="email" name="gmail_{{ numero.id }}" value="{{ numero.gmail|default_if_none:'' }}" class="form-control form-control-sm" style="min-width:120px; max-width:160px; font-size:0.97em;"></td>
+                <td><input type="text" name="nombre_completo_{{ numero.id }}" value="{{ numero.nombre_completo|default_if_none:'' }}" class="form-control form-control-sm" style="min-width:120px; max-width:160px; font-size:0.97em;"></td>
+                <td><input type="text" name="telefono_{{ numero.id }}" value="{{ numero.telefono|default_if_none:'' }}" class="form-control form-control-sm" style="min-width:90px; max-width:120px; font-size:0.97em;"></td>
+                <td class="align-middle"><input type="checkbox" name="disponible_{{ numero.id }}" {% if numero.disponible %}checked{% endif %} style="transform: scale(1.2);"></td>
+                <td class="align-middle"><input type="checkbox" name="asistencia_{{ numero.id }}" {% if numero.asistencia %}checked{% endif %} style="transform: scale(1.2);"></td>
+                <input type="hidden" name="numero_id_{{ numero.id }}" value="{{ numero.id }}">
+              </tr>
+            {% endfor %}
+            <tr>
+              <td colspan="6" class="text-end p-3">
+                <button type="submit" class="btn btn-success px-5" style="font-family: 'Press Start 2P', cursive; font-size:1em; background: #43b047; border:2px solid #007bff; box-shadow:0 2px 8px #b2ffb2;">Guardar hoja {{ hoja.hoja }}</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
   </div>
-{% endfor %}
+  {% endfor %}
+</div>
 {% endblock %}

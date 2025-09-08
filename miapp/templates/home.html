@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 animate__animated animate__fadeIn">
+    <h1 class="text-center display-2 mb-4 animate__animated animate__bounceInDown" style="font-family: 'Luckiest Guy', cursive; color: #ffcc00; text-shadow: 3px 3px 0 #000, 6px 6px 0 #ff0000; letter-spacing: 2px;">
+        <span class="animate__animated animate__pulse animate__infinite animate__slower" style="filter: drop-shadow(0 0 8px #fff700);">🏁RIFA GRAND PRIX🏁</span>
+    </h1>
+    <div class="row justify-content-center align-items-center g-0">
+        <div class="col-lg-6 d-flex align-items-center justify-content-center mb-4 mb-lg-0">
+            <div class="position-relative w-100 animate__animated animate__fadeInLeft animate__delay-1s" style="max-width: 420px; border-radius: 30px; overflow: hidden; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); border: 4px solid #ffcc00; background: linear-gradient(135deg, #fffbe0 0%, #ffe5e5 100%);">
+                <img src="{% static 'img/auto.jpg' %}" alt="Fondo Grand Prix" class="w-100 animate__animated animate__zoomIn animate__delay-2s" style="object-fit: cover; min-height: 260px; filter: brightness(0.85) drop-shadow(0 0 10px #ffcc00); border-radius: 30px;">
+                <span class="position-absolute top-0 start-0 m-2 p-2 bg-danger text-white rounded-pill animate__animated animate__bounceIn animate__delay-3s" style="font-size:1.1rem; font-family: 'Luckiest Guy', cursive; letter-spacing:1px; box-shadow:0 2px 8px #0002;">🚗💨</span>
+            </div>
+        </div>
+        <div class="col-lg-6 d-flex align-items-center justify-content-center">
+            <div class="p-4 w-100 animate__animated animate__fadeInRight animate__delay-2s" style="background: rgba(255,255,255,0.88); border-radius: 28px; min-width: 260px; max-width: 540px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); border: 3px solid #ffcc00; position:relative;">
+                <div class="text-center mb-2 animate__animated animate__fadeInDown animate__delay-3s">
+                    <span class="badge bg-danger text-white px-3 py-2 mb-2" style="font-size:1.1rem; font-family: 'Luckiest Guy', cursive; letter-spacing:1px; box-shadow:0 2px 8px #e63946a0; border:2px solid #fff;">¡Necesitamos tu ayuda! ❤️</span>
+                </div>
+                <div class="mb-3 text-center animate__animated animate__fadeInLeft animate__delay-4s">
+                    <span style="display:inline-block; font-size:1.5rem; margin-bottom:6px;">🚨</span><br>
+                    <span class="animate__animated animate__fadeInUp animate__delay-4s" style="color:#222; font-weight:500; font-size: 1.13rem;">El vehículo que transporta a nuestro equipo de <b>LudumBar</b> sufrió un grave accidente provocado por un conductor ebrio que se dio a la fuga.</span>
+                </div>
+                <div class="mb-3 text-center animate__animated animate__fadeInRight animate__delay-4s">
+                    <span style="display:inline-block; font-size:1.2rem;">🙏</span><br>
+                    <span class="animate__animated animate__fadeInUp animate__delay-4s" style="color:#555; font-size: 1.13rem;">Afortunadamente, no hubo heridos graves, pero el auto quedó destruido.</span>
+                </div>
+                <div class="mb-3 text-center animate__animated animate__fadeInLeft animate__delay-4s">
+                    <span style="display:inline-block; font-size:1.2rem;">🔧</span><br>
+                    <span class="animate__animated animate__fadeInUp animate__delay-4s" style="color:#333; font-size: 1.13rem;">Para poder recuperar el motor y restablecer el servicio que lleva a nuestro equipo a casa cada noche, hemos organizado una rifa.</span>
+                </div>
+                <div class="mb-2 text-center animate__animated animate__fadeInRight animate__delay-4s">
+                    <span style="display:inline-block; font-size:1.2rem;">🤝</span><br>
+                    <span class="animate__animated animate__fadeInUp animate__delay-4s" style="color:#333; font-size: 1.13rem;">Con tu participación, nos ayudas a volver a la normalidad.</span>
+                </div>
+                <div class="text-center mt-3 animate__animated animate__tada animate__delay-8s animate__infinite animate__slower">
+                    <span class="badge bg-warning text-dark px-4 py-2" style="font-size:1.25rem; font-family: 'Luckiest Guy', cursive; letter-spacing:1px; box-shadow:0 2px 8px #ffcc00a0; border:2px solid #e63946;">🏆 ¡Participa en la rifa! 🏆</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+{% endblock %}

@@ -2,9 +2,9 @@
 {% load static %}
 {% block title %}Números de Rifa{% endblock %}
 {% block content %}
-<div class="text-center mb-4">
-	<h2 class="mb-2">Números de la Rifa</h2>
-	<nav class="premio-nav premio-nav-pequena mb-3">
+<div class="text-center mb-4 animate__animated animate__fadeIn animate__fastest">
+	<h2 class="mb-2 animate__animated animate__bounceInDown animate__faster">Números de la Rifa</h2>
+	<nav class="premio-nav premio-nav-pequena mb-3 animate__animated animate__fadeInLeft animate__faster">
 		<ul class="nav justify-content-center">
 			<li class="nav-item">
 				<a class="nav-link premio-nav-link" href="{% url 'premios' %}">Premios</a>
@@ -15,7 +15,7 @@
 		</ul>
 	</nav>
 	<!-- Segunda barra de navegación para hojas -->
-	<nav class="premio-nav mb-4">
+	<nav class="premio-nav mb-4 animate__animated animate__fadeInRight animate__faster">
 		<ul class="nav justify-content-center">
 			{% if hoja != 1 %}
 			<li class="nav-item"><a class="nav-link premio-nav-link" href="{% url 'numeros' %}">Hoja 1</a></li>
@@ -31,7 +31,7 @@
 			{% endif %}
 		</ul>
 	</nav>
-	<p style="color:#555; font-size:1.1em;">Selecciona tu número favorito.<br>
+	<p class="animate__animated animate__fadeInUp animate__faster" style="color:#555; font-size:1.1em;">Selecciona tu número favorito.<br>
 		<span style="display:inline-flex; align-items:center; font-weight:bold;">
 			<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Disponible" style="width:32px; height:32px; margin-right:6px;">Disponible
 		</span>
@@ -43,14 +43,15 @@
 </div>
 <div class="numeros-grid">
 	{% for numero in numeros %}
-		<div class="numero-bloque-mario">
+		<div class="numero-bloque-mario animate__animated animate__zoomIn animate__fastest" style="animation-delay: {{ forloop.counter0|add:1 }}0ms;">
 			{% if numero.disponible %}
-				<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Bloque Mario" class="bloque-img">
+				<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Bloque Mario" class="bloque-img animate__animated animate__pulse animate__infinite animate__slower">
 			{% else %}
-				<img src="{% static 'img/bloque_ocupado.jpg' %}" alt="Bloque Ocupado" class="bloque-img">
+				<img src="{% static 'img/bloque_ocupado.jpg' %}" alt="Bloque Ocupado" class="bloque-img animate__animated animate__flash animate__infinite animate__slower">
 			{% endif %}
 			<span class="numero-en-bloque">{{ numero.valor }}</span>
 		</div>
 	{% endfor %}
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 {% endblock %}

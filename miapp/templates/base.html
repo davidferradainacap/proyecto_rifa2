@@ -13,22 +13,33 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-mario">
       <div class="container">
-        <a class="navbar-brand" href="{% url 'premios' %}">Rifa Mario</a>
+  <a class="navbar-brand" href="{% url 'home' %}">
+  <img src="{% static 'img/logo_ludum.png' %}" alt="Ludum Logo" style="height:110px; max-width:400px; object-fit:contain;">
+    </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto gap-2 flex-wrap">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'premios' %}">Premios</a>
+              <a class="nav-link nav-mario-btn" href="{% url 'premios' %}"><span class="nav-icon">🏆</span> Premios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'numeros' %}">Números</a>
+              <a class="nav-link nav-mario-btn" href="{% url 'numeros' %}"><span class="nav-icon">🔢</span> Números</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+              <a class="nav-link nav-mario-btn" href="{% url 'contacto' %}"><span class="nav-icon">📞</span> Contacto</a>
             </li>
-      {% if user.is_authenticated %}
+      {% if user.is_authenticated and user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'gestor_publicidad' %}">Publicidad</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'gestor_premios' %}">Gestor de Premios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'detalle_numeros_admin' %}">Detalle</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'admin_numeros' %}">Admin Números</a>
         </li>
@@ -52,9 +63,20 @@
     <main>
         {% block content %}{% endblock %}
     </main>
-    <footer class="text-center text-white py-3" style="background:#222; border-top:6px solid #ffb300; opacity:0.9;">
-        Hecho con ❤️ estilo Mario Bros - {{ now|date:"Y" }}
-    </footer>
+    <!-- Botón flotante para volver al principio -->
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'});" title="Volver arriba" id="btnScrollTop" style="position:fixed; right:24px; bottom:32px; z-index:9999; background:linear-gradient(90deg,#ffe082 60%,#ffb300 100%); color:#b35a00; border:2px solid #ff9800; border-radius:50%; width:56px; height:56px; box-shadow:0 4px 16px #ffe082; display:flex; align-items:center; justify-content:center; font-size:2em; cursor:pointer; transition:transform 0.1s;">
+      <span style="font-size:1.5em;">⬆️</span>
+    </button>
+    <script>
+      // Mostrar/ocultar el botón según el scroll
+      window.addEventListener('scroll', function() {
+        const btn = document.getElementById('btnScrollTop');
+        if(window.scrollY > 200) { btn.style.display = 'flex'; }
+        else { btn.style.display = 'none'; }
+      });
+      // Oculto por defecto
+      document.getElementById('btnScrollTop').style.display = 'none';
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

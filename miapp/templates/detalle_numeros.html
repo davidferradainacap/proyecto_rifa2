@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Detalle de Números{% endblock %}
+{% block content %}
+<div class="text-center mb-4">
+	<h2 class="mb-2">Detalle de Números</h2>
+	<nav class="premio-nav mb-4">
+		<ul class="nav justify-content-center">
+			{% for h in hojas %}
+				<li class="nav-item">
+					<a class="nav-link premio-nav-link {% if hoja == h %}active{% endif %}" href="?hoja={{ h }}">Hoja {{ h }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+			<div class="container mt-5 animate__animated animate__fadeIn">
+	<p style="color:#555; font-size:1.1em;">Haz clic en cualquier número para ver su información.<br>
+		<span style="display:inline-flex; align-items:center; font-weight:bold;">
+			<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Disponible" style="width:32px; height:32px; margin-right:6px;">Disponible
+		</span>
+		&nbsp;|&nbsp;
+		<span style="display:inline-flex; align-items:center; font-weight:bold;">
+			<img src="{% static 'img/bloque_ocupado.jpg' %}" alt="No disponible" style="width:32px; height:32px; margin-right:6px;">No disponible
+		</span>
+	</p>
+</div>
+<div class="numeros-grid">
+	{% for numero in numeros %}
+		<a href="{% url 'numero_detalle' numero.pk %}" class="numero-bloque-mario" style="text-decoration:none;">
+			{% if numero.disponible %}
+				<img src="{% static 'img/bloqueo_mario.jpg' %}" alt="Bloque Mario" class="bloque-img">
+			{% else %}
+				<img src="{% static 'img/bloque_ocupado.jpg' %}" alt="Bloque Ocupado" class="bloque-img">
+			{% endif %}
+			<span class="numero-en-bloque">{{ numero.valor }}</span>
+		</a>
+	{% endfor %}
+</div>
+{% endblock %}

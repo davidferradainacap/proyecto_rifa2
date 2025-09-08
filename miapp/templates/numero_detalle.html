@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Detalle del Número {{ numero.valor }}{% endblock %}
 {% block content %}
-<div class="container" style="max-width:400px; margin:2em auto;">
+<div class="container mt-5 animate__animated animate__fadeIn" style="max-width:400px; margin:2em auto;">
 	<h2 class="mb-4 text-center">Número {{ numero.valor }} (Hoja {{ numero.hoja }})</h2>
 	<ul class="list-group mb-3">
-		<li class="list-group-item"><strong>Disponible:</strong> {% if numero.disponible %}Sí{% else %}No{% endif %}</li>
+	<li class="list-group-item"><strong>Disponible:</strong> {% if numero.disponible %}Sí{% else %}No{% endif %}</li>
+	<li class="list-group-item"><strong>Asistencia:</strong> {% if numero.asistencia %}Sí{% else %}No{% endif %}</li>
 		<li class="list-group-item"><strong>Nombre completo:</strong> {{ numero.nombre_completo|default:'-' }}</li>
 		<li class="list-group-item"><strong>Teléfono:</strong> {{ numero.telefono|default:'-' }}</li>
 		<li class="list-group-item"><strong>Gmail:</strong> {{ numero.gmail|default:'-' }}</li>

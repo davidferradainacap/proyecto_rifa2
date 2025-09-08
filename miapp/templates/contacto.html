@@ -1,23 +1,32 @@
 {% extends 'base.html' %}
 {% block title %}Contacto - Comprar Número de Rifa{% endblock %}
 {% block content %}
-<div class="container-fluid d-flex flex-column justify-content-center align-items-center min-vh-100 p-3">
-    <div class="w-100" style="max-width: 500px;">
-        <h2 class="mb-4 text-center" style="font-size:2rem;">
-            ¿Quieres comprar un número de rifa?
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center min-vh-100 p-3 animate__animated animate__fadeIn" style="background: linear-gradient(135deg, #fffbe0 0%, #ffe5e5 100%); min-height: 100vh;">
+    <div class="w-100 animate__animated animate__zoomIn" style="max-width: 440px; background: rgba(255,255,255,0.92); border-radius: 28px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18); border: 3px solid #ffcc00; padding: 2.5rem 1.5rem; position:relative;">
+        <div class="text-center mb-3 animate__animated animate__bounceInDown animate__delay-1s">
+            <span style="font-size:2.5rem; filter: drop-shadow(0 0 8px #25d366);">📱</span>
+        </div>
+        <h2 class="mb-3 text-center animate__animated animate__fadeInLeft animate__delay-1s" style="font-size:2rem; font-family: 'Luckiest Guy', cursive; color:#25d366; text-shadow: 1px 1px 0 #fff, 2px 2px 0 #007bff; letter-spacing:1px;">
+            ¡Compra tu número de rifa!
         </h2>
-        <p class="mb-4 text-center" style="font-size:1rem;">
-            Haz clic en el botón para contactar al administrador por WhatsApp.
+        <p class="mb-4 text-center animate__animated animate__fadeInRight animate__delay-2s" style="font-size:1.08rem; color:#333;">
+            Haz clic en el botón para contactar al administrador por <b style="color:#25d366;">WhatsApp</b> y asegurar tu participación en el evento.<br>
+            <span style="color:#e63946; font-weight:bold;">¡Suerte y gracias por apoyar!</span>
         </p>
-        <a href="https://wa.me/+56942263513?text=Hola%2C%20quiero%20comprar%20un%20n%C3%BAmero%20de%20rifa" target="_blank" class="btn btn-success btn-lg w-100" style="font-size:1.1rem; padding: 0.75rem 0;">
-            Contactar por WhatsApp
+        <a href="https://wa.me/+56942263513?text=Hola%2C%20quiero%20comprar%20un%20n%C3%BAmero%20de%20rifa" target="_blank" class="btn btn-success btn-lg w-100 animate__animated animate__tada animate__infinite animate__slower" style="font-size:1.18rem; padding: 0.85rem 0; font-family: 'Luckiest Guy', cursive; letter-spacing:1px; box-shadow:0 2px 8px #25d366a0; border:2px solid #ffcc00;">
+            <span style="font-size:1.3rem; vertical-align:middle;">💬</span> Contactar por WhatsApp
         </a>
+        <div class="text-center mt-4 animate__animated animate__fadeInUp animate__delay-3s">
+            <span style="font-size:1.1rem; color:#007bff;">¿Dudas? ¡Escríbenos y te ayudamos!</span>
+        </div>
     </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
     @media (max-width: 576px) {
-        h2 { font-size: 1.2rem !important; }
-        p { font-size: 0.95rem !important; }
-        .btn-lg { font-size: 0.98rem !important; padding: 0.6rem 0 !important; }
+        h2 { font-size: 1.25rem !important; }
+        p { font-size: 0.98rem !important; }
+        .btn-lg { font-size: 1rem !important; padding: 0.7rem 0 !important; }
+        .container-fluid > .w-100 { padding: 1.2rem 0.5rem !important; }
     }
     </style>
 </div>
