@@ -26,13 +26,7 @@ SECRET_KEY = 'django-insecure-rf=#g35y6!j88fzwsvg%2-dap(jni28q-1_ayds7+4koaj@tw4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "neat-rocks-agree.loca.lt",
-    "dry-clocks-post.loca.lt",
-    "tender-walls-bake.loca.lt"
-]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'davidferrada34.pythonanywhere.com']
 
 
 # Application definition
@@ -122,13 +116,18 @@ USE_I18N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "miapp/static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+<<<<<<< HEAD
+=======
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+>>>>>>> b15445d848f7325f671d59eb1608baa8342da5a5
 # Media files (User uploads)
 # https://docs.djangoproject.com/en/4.1/topics/files/
 
